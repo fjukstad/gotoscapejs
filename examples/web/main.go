@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/fjukstad/gotoscapejs"
@@ -64,17 +63,9 @@ func main() {
 	mux.HandleFunc("/graph", func(w http.ResponseWriter, req *http.Request) {
 		cy.Write(w)
 	})
+	mux.Handle("/", http.FileServer(http.Dir(".")))
 
-	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		b, err := ioutil.ReadFile("index.html")
-		if err != nil {
-			http.Error(w, "NOT FOUND", 404)
-			return
-		}
-		w.Write(b)
-	})
-
-	fmt.Println("Visit localhost:9090")
+	fmt.Println("Demo running on localhost:9090")
 	err := http.ListenAndServe(":9090", mux)
 	fmt.Println(err)
 
