@@ -10,21 +10,21 @@ type Cytoscape struct {
 }
 
 type Element struct {
-	Group    string   `json:"group"`
-	Data     Data     `json:"data"`
-	Position Position `json:"position"`
+	Group    string   `json:"group,omitempty"`
+	Data     Data     `json:"data,omitempty"`
+	Position Position `json:"position,omitempty"`
 }
 
 type Position struct {
-	X float64 `json:"x"`
-	Y float64 `json:"y"`
+	X float64 `json:"x,omitempty"`
+	Y float64 `json:"y,omitempty"`
 }
 
 type Data struct {
-	Id     string `json:"id"`
-	Parent string `json:"parent"`
-	Source string `json:"source"`
-	Target string `json:"target"`
+	Id     string `json:"id,omitempty"`
+	Parent string `json:"parent,omitempty"`
+	Source string `json:"source,omitempty"`
+	Target string `json:"target,omitempty"`
 }
 
 func (cy *Cytoscape) Add(e Element) {
