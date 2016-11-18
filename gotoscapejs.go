@@ -21,10 +21,11 @@ type Position struct {
 }
 
 type Data struct {
-	Id     string `json:"id,omitempty"`
-	Parent string `json:"parent,omitempty"`
-	Source string `json:"source,omitempty"`
-	Target string `json:"target,omitempty"`
+	Id     string                 `json:"id,omitempty"`
+	Parent string                 `json:"parent,omitempty"`
+	Source string                 `json:"source,omitempty"`
+	Target string                 `json:"target,omitempty"`
+	Data   map[string]interface{} `json:"data,omitempty"`
 }
 
 func (cy *Cytoscape) Add(e Element) {

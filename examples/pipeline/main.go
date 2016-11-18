@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 
@@ -10,7 +11,11 @@ import (
 
 func main() {
 
-	p, err := pipeline.ParseConfig("pipeline.json")
+	var pipelineFilename = flag.String("p", "pipeline.json", "pipeline definition. see github.com/fjukstad/walrus for more info")
+
+	flag.Parse()
+
+	p, err := pipeline.ParseConfig(*pipelineFilename)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -23,6 +28,13 @@ func main() {
 			Group: "nodes",
 			Data: gotoscapejs.Data{
 				Id: stage.Name,
+				Data: map[string]interface{}{
+					"Image":   stage.Image,
+					"Cmd":     stage.Cmd,
+					"Env":     stage.Env,
+					"Volumes": stage.Volumes,
+					"Inputs":  stage.Inputs,
+				},
 			},
 		})
 
